@@ -2,7 +2,7 @@ class Bullet{
     constructor(x,y,direct) {
         this.xB = x;
         this.yB = y;
-        this.speed = 5;
+        this.speed = 10;
         this.directB = direct;
         this.rad = 5
         this.status = true;
@@ -15,11 +15,11 @@ class Bullet{
         pen.closePath();
         pen.fill();
     }
-    checkCollision(obj) {
-        let left2 = obj.x + 20;
-        let right2 = obj.x + obj.width -20;
-        let top2 = obj.y +20;
-        let bottom2 = obj.y + obj.height - 20;
+    checkCollision(obj,a) {
+        let left2 = obj.x + a;
+        let right2 = obj.x + obj.width -a;
+        let top2 = obj.y +a;
+        let bottom2 = obj.y + obj.height - a;
         let left1 = this.xB - this.rad;
         let right1 = this.xB + this.rad;
         let top1 = this.yB - this.rad;

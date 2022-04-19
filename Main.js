@@ -1,18 +1,21 @@
 let paper = document.getElementById('mycanvas');
-let tank1 = new Tank(paper.width / 2, paper.height / 2, 50, 'up');
+paper.height = window.innerHeight;
+paper.width = window.innerWidth;
+let tank1 = new Tank(paper.width / 2, paper.height / 2, 50, 'top');
+let boss = new Boss(200,200);
 let pen = paper.getContext('2d');
 const KEY_A = 'a';
 const KEY_D = 'd';
 const KEY_S = 's';
 const KEY_W = 'w';
 const KEY_J = 'j';
-let count1 = 0;
-const loadImg = 150;
-let count2 = 1;
-tank1.render(paper);
+// tank1.render(paper);
 let n = 5;
 let enermys = [];
 let score = new ScoreBoard(70,40,0);
+let gameOver = false;
+document.getElementById('restart-game').hidden = true;
+
 function clearAll() {
     pen.clearRect(0, 0, paper.width, paper.height);
 }
@@ -34,13 +37,25 @@ function renderS(a) {
     a.checkScreen(paper);
     a.render(paper);
 }
-
+function renderBoss(){
+    boss.autoMove();
+    boss.checkScreen(paper);
+    boss.render(paper);
+}
 function renderAllE() {
     for (let i = 0; i < enermys.length; i++) {
         renderS(enermys[i]);
     }
 }
-
+function restart(){
+    clearAll();
+    gameOver = false;
+    main();
+    document.getElementById('restart-game').hidden = true;
+    enermys.length = 0;
+    score.count = 0;
+    n=5;
+}
 function drawBG(canvas) {
     let pen = canvas.getContext('2d');
     let img = document.getElementById('bg');
@@ -53,12 +68,11 @@ function randomFire(){
 function checkAll() {
     for (let i = 0; i < enermys.length; i++) {
         for (let j = 0; j < tank1.bullets.length; j++) {
-            if (tank1.bullets[j].checkCollision(enermys[i])) {
+            if (tank1.bullets[j].checkCollision(enermys[i],20)) {
                 score.count +=1;
                 enermys.splice(i, 1);
                 tank1.bullets.splice(j, 1);
                 i--;
-                j--;
                 break;
             }
         }
@@ -68,28 +82,48 @@ function checkCollisionTank(){
     for (let i = 0; i < enermys.length; i++) {
         for (let j = 0; j < enermys[i].enermyBullets.length; j++) {
             if(enermys[i].enermyBullets[j].checkCollision(tank1)){
-                tank1.hp -= 10;
-                // enermys[i].bullets.splice(j,1);
-                break;
+                tank1.hp -= 50;
+                enermys[i].enermyBullets.splice(j,1);
+                j--;
             }
         }
     }
     if(tank1.hp <= 0){
-        alert('Lose');
+        gameOver = true;
+        tank1.hp = 100;
+    }
+}
+function checkCollisionBoss(){
+    for (let i = 0; i < tank1.bullets.length; i++) {
+        if(tank1.bullets[i].checkCollision(boss,40)){
+            boss.hp -= 2;
+            tank1.bullets.splice(i,1);
+            i--;
+            break;
+        }
+    }
+    if(boss.hp <= 0){
+        score.count += 20;
+        boss.hp = 100;
+        n = 5;
     }
 }
 function main() {
     clearAll();
-    if (enermys.length === 0) {
+    if (enermys.length === 0 && n <=7) {
         n++;
         creatEnermy(enermys);
     }
+    document.getElementById('start-game').hidden = true;
     checkAll();
     checkCollisionTank();
     drawBG(paper);
-    // turnE(enermys);
     renderAllE();
     score.render(paper);
+    if(n > 7 && boss.hp > 0){
+        renderBoss();
+        checkCollisionBoss();
+    }
     for (let i = 0; i < enermys.length; i++) {
         enermys[i].fire();
         enermys[i].drawBulletE(paper);
@@ -97,9 +131,13 @@ function main() {
     tank1.drawBullet(paper);
     tank1.fire();
     tank1.render(paper);
-    requestAnimationFrame(main);
+    if(gameOver === false){
+        requestAnimationFrame(main);
+    }else {
+        GameOver();
+        document.getElementById('restart-game').hidden = false;
+    }
 }
-main();
 window.addEventListener('keyup', moveU);
 function moveU(evt) {
     switch (evt.key) {
@@ -134,7 +172,22 @@ function moveD(evt) {
         case KEY_J:
             tank1.isFire = true;
             break;
-
     }
 }
+function GameOver(){
+    if(gameOver === true){
+        drawBG(paper);
+        pen.font = "50px Comic Sans MS";
+        pen.textAlign = "center";
+        pen.fillStyle = 'white';
+        pen.fillText('Lose', paper.width/2, paper.height/2);
+    }
+}
+let imgBG = document.getElementById('start-game-BG')
+pen.drawImage(imgBG,0,0,paper.width,paper.height);
+// function start_Game(){
+//     let img = new Image();
+//     img.src ='img/start'
+// }
+
 

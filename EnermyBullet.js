@@ -6,7 +6,6 @@ class EnermyBullet{
         this.witdh = 40;
         this.direct = direct;
         this.speed = 5;
-        // this.img = document.getElementById('E-bullet');
         this.img = document.getElementById('E-bullet');
     }
     render(paper){
@@ -20,9 +19,9 @@ class EnermyBullet{
         let top2 = obj.y ;
         let bottom2 = obj.y + obj.size ;
         let left1 = this.x ;
-        let right1 = this.x ;
+        let right1 = this.x + this.witdh;
         let top1 = this.y ;
-        let bottom1 = this.y;
+        let bottom1 = this.y + this.height;
         if(left1 > right2 || right1 < left2 || top1 > bottom2 || bottom1 < top2){
             return false;
         }
@@ -32,19 +31,19 @@ class EnermyBullet{
         switch (this.direct){
             case 'top':
                 this.y -= this.speed;
-                this.img.src = 'img/ballU.png';
+                this.img.src = 'img/e-Bullet/ballU.png';
                 break;
             case 'bottom':
                 this.y += this.speed;
-                this.img.src = 'img/ballD.png'
+                this.img.src = 'img/e-Bullet/ballD.png'
                 break;
             case 'right':
                 this.x += this.speed;
-                this.img.src = 'img/ballR.png'
+                this.img.src = 'img/e-Bullet/ballR.png'
                 break;
             case 'left':
                 this.x -= this.speed;
-                this.img.src = 'img/ballL.png'
+                this.img.src = 'img/e-Bullet/ballL.png'
                 break;
         }
     }

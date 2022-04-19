@@ -4,21 +4,42 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
+    <style>
+        #canvas{
+            text-align: center;
+        }
+        #start{
+            position: absolute;
+            margin-left: 750px;
+            margin-top: 350px;
+        }
+        #restart{
+            position: absolute;
+            margin-top: 350px;
+            margin-left: 830px;
+        }
+    </style>
+    <link rel="stylesheet" href="css.css">
 </head>
 <body>
-
-<canvas id="mycanvas" width="1250px" height="650px" style="background-color: sandybrown" >
+<div id="start"><button id="start-game" onclick="main()" class="button-85">Start Game</button></div>
+<div id="restart"><button id="restart-game" onclick="restart()" class="button-85">Restart</button></div>
+<div id="canvas">
+    <canvas id="mycanvas" width=`1000px` height="650px" >
+        <img src="img/startGameBG.png" alt="" id="start-game-BG">
     <img src="img/backg.jpg" alt="" id="bg">
     <img src="img/up.png" style="width: 100px; height: 100px; " id="image" >
-    <img src="img/EnermyU1.png" id="image0">
-    <img src="img/ballD.png" alt="" id="E-bullet">
+    <img src="img/Enermy/EnermyU1.png" id="image0">
+    <img src="img/e-Bullet/ballU.png" alt="" id="E-bullet">
 
-</canvas>
+</canvas></div>
+
 </body>
 <script src="ScoreBoard.js"></script>
 <script src="EnermyBullet.js"></script>
 <script src="Bullet.js"></script>
 <script src="Enermy.js"></script>
+<script src="Boss.js"></script>
 <script src="Tank.js"></script>
 <script src="Main.js"></script>
 </html>
