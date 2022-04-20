@@ -10,24 +10,54 @@
         }
         #start{
             position: absolute;
-            margin-left: 750px;
-            margin-top: 350px;
+            margin-left: 810px;
+            margin-top: 370px;
+
         }
         #restart{
             position: absolute;
-            margin-top: 350px;
-            margin-left: 830px;
+            margin-top: 450px;
+            margin-left: 770px;
         }
+        #game-over{
+            position: absolute;
+            margin-top: 450px;
+            margin-left: 870px;
+
+        }
+        #help{
+            position: absolute;
+            margin-top: 410px;
+            margin-left: 810px;
+        }
+        #back{
+            position: absolute;
+            margin-top: 25px;
+            margin-left: 50px;
+        }
+        /*#home{*/
+        /*    position: absolute;*/
+        /*    margin-top: 25px ;*/
+        /*    margin-left: 1580px;*/
+        /*}*/
     </style>
     <link rel="stylesheet" href="css.css">
+
+
 </head>
 <body>
-<div id="start"><button id="start-game" onclick="main()" class="button-85">Start Game</button></div>
+<div id="start"><button id="start-game" onclick="startGame()" class="button-85">Start Game</button></div>
 <div id="restart"><button id="restart-game" onclick="restart()" class="button-85">Restart</button></div>
+<div id="game-over">
+    <button id="game-over-btn" onclick="game_over()" class="button-85">Game Over</button></div>
+<div id="help"><button id="introduce" onclick="help()" class="button-85">How To Play</button></div>
+<div id="back"><button id="back-btn" onclick="back_btn()" class="button-85">< Back</button></div>
+<!--<div id="home"><button id="back-to-home" onclick="home1()" class="button-85">Home</button></div>-->
 <div id="canvas">
     <canvas id="mycanvas" width=`1000px` height="650px" >
         <img src="img/startGameBG.png" alt="" id="start-game-BG">
-    <img src="img/backg.jpg" alt="" id="bg">
+        <img src="img/How_to_play1.png" alt="" id="howToPlay">
+    <img src="img/background-ingame.png" alt="" id="bg">
     <img src="img/up.png" style="width: 100px; height: 100px; " id="image" >
     <img src="img/Enermy/EnermyU1.png" id="image0">
     <img src="img/e-Bullet/ballU.png" alt="" id="E-bullet">
@@ -35,11 +65,13 @@
 </canvas></div>
 
 </body>
-<script src="ScoreBoard.js"></script>
-<script src="EnermyBullet.js"></script>
-<script src="Bullet.js"></script>
-<script src="Enermy.js"></script>
-<script src="Boss.js"></script>
-<script src="Tank.js"></script>
-<script src="Main.js"></script>
+<script src="js/ScoreBoard.js"></script>
+<script src="js/EnermyBullet.js"></script>
+<script src="js/Bullet.js"></script>
+<script src="js/Enermy.js"></script>
+<script src="js/Boss.js"></script>
+<script src="js/Tank.js"></script>
+<script src="js/Monitor.js"></script>
+<script src="js/Sound.js"></script>
+<script src="js/Main.js"></script>
 </html>
