@@ -22,6 +22,11 @@ class Boss{
         img.src = this.img;
         ctx.drawImage(img,this.x,this.y,this.width,this.height);
         ctx.beginPath();
+        ctx.rect(this.x, this.y - 10, this.width,5);
+        ctx.fillStyle = 'white';
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
         ctx.rect(this.x, this.y - 10, this.width*(this.hp/100),5);
         ctx.fillStyle = 'red';
         ctx.fill();

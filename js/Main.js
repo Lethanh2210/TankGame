@@ -12,8 +12,12 @@ const KEY_J = 'j';
 const KEY_K = 'k';
 let n = 5;
 let enermys = [];
-let score = new ScoreBoard(70,40,0);
+let score = new ScoreBoard(100,40,0,'red','Score');
+let maxScore = new ScoreBoard(1550,40,0,'blue','Max Score');
 let gameOver = false;
+window.onload = function (){
+    localStorage.setItem('score', '0');
+}
 document.getElementById('restart-game').hidden = true;
 document.getElementById('game-over-btn').hidden = true;
 document.getElementById('back-btn').hidden = true;
@@ -22,9 +26,12 @@ let collision = new Sound('sound/Collision.mp3');
 let gamePlay = new Sound('sound/gamePlaySound.mp3')
 let imgBG = document.getElementById('start-game-BG');
 pen.drawImage(imgBG,0,0,paper.width,paper.height);
-
 function clearAll() {
     pen.clearRect(0, 0, paper.width, paper.height);
+}
+function renderMaxScore(){
+    maxScore.count = localStorage.getItem('score');
+    maxScore.render(paper);
 }
 function main() {
     clearAll();
@@ -40,6 +47,7 @@ function main() {
     drawBG(paper);
     renderAllE();
     score.render(paper);
+    renderMaxScore();
     for (let i = 0; i < enermys.length; i++) {
         enermys[i].fire();
         enermys[i].drawBulletE(paper);
@@ -50,7 +58,6 @@ function main() {
         boss.autoFire();
         boss.drawBulletB(paper);
     }
-
     tank1.move();
     tank1.drawBullet(paper);
     tank1.fire();
@@ -59,7 +66,10 @@ function main() {
         requestAnimationFrame(main);
     }else {
         GameOver();
-
+        let temp = localStorage.getItem('score');
+        if(temp < score.count){
+            localStorage.setItem('score',score.count);
+        }
     }
 }
 

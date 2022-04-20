@@ -110,9 +110,12 @@ function restart(){
     enermys.length = 0;
     score.count = 0;
     n=5;
+    score.count = 0;
+    tank1.hp = 100;
 }
 function startGame(){
     clearAll();
+    score.count = 0;
     bgSound.stop();
     gamePlay.play();
     gamePlay.sound.loop = true;
@@ -124,6 +127,7 @@ function startGame(){
     enermys.length = 0;
     score.count = 0;
     n=5;
+    tank1.hp = 100;
 }
 function help(){
     clearAll();
