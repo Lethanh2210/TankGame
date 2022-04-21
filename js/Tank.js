@@ -37,8 +37,6 @@ class Tank{
             [this.x+this.size/2-15,this.y+this.size/2-15],
             [this.x+this.size/2+15,this.y+this.size/2+15]
         ]
-
-
         this.count++;
         if(this.count >= this.reloadTime){
             if (this.isFire){
@@ -57,7 +55,6 @@ class Tank{
                         this.bullets.push(bullet);
                         break;
                 }
-
             }
             this.count = 0;
         }

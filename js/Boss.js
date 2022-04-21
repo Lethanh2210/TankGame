@@ -14,7 +14,6 @@ class Boss{
         this.reloadTime = 200;
         this.hp = 100;
         this.bullets = [];
-        this.status = false;
     }
     render(canvas){
         let ctx = canvas.getContext('2d');

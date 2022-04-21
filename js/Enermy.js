@@ -7,7 +7,6 @@ class Enermy {
         this.speed = 2;
         this.direct = "bottom";
         this.img = '';
-        this.status = true;
         this.count1 = 0;
         this.reloadTime = randomFire();
         this.count2 = 1;

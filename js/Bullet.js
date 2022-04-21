@@ -5,7 +5,6 @@ class Bullet{
         this.speed = 10;
         this.directB = direct;
         this.rad = 5
-        this.status = true;
     }
     render(canvas){
         let pen = canvas.getContext('2d');
